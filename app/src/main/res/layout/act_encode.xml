@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <Button
+        android:id="@+id/btn_encode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="创建二维码"
+        tools:ignore="MissingConstraints" />
+
+    <EditText
+        android:id="@+id/etn_input_content"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="10dp"
+        android:inputType=""
+        android:textColor="#000"
+        android:layout_marginEnd="10dp"
+        android:hint="请输入内容"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toRightOf="@+id/btn_encode"
+        tools:ignore="MissingConstraints" />
+
+    <ImageView
+        android:id="@+id/iv_qrcode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/etn_input_content"
+        android:contentDescription="TODO"/>
+
+
+    <Button
+        android:id="@+id/btn_decode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        app:layout_constraintTop_toBottomOf="@id/iv_qrcode"
+        android:text="解析二维码"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/tv_result"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:paddingStart="20dp"
+        android:textColor="#000"
+        android:paddingLeft="20dp"
+        app:layout_constraintTop_toTopOf="@id/btn_decode"
+        app:layout_constraintBottom_toBottomOf="@id/btn_decode"
+        app:layout_constraintLeft_toRightOf="@+id/btn_decode"
+        app:layout_constraintRight_toRightOf="parent"
+        />
+
+</android.support.constraint.ConstraintLayout>
