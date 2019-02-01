@@ -1,5 +1,5 @@
 ## StarBarcode
-一个基于Zxing封装的条形码扫描库，支持多种条形码，可生成、解析带logo的二维码，自动放大镜头，设备移动后进行对焦、连续对焦，扫描UI自定义。
+支持多种条形码，可生成、解析带logo的二维码，自动放大镜头，设备移动时自动对焦、连续对焦，扫描UI自定义。
 
 ## Demo下载
 [app-release.apk](https://github.com/kangdongpu/StarBarcode/raw/master/app-release.apk)
