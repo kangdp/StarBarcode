@@ -29,6 +29,7 @@ public class ScanView extends View{
     private int borderHeight = 5;//边框高度
     private int scanLineOffsetY;//扫描线垂直偏移量
     private Rect borderRect = new Rect();
+    private Rect scanLineRect = new Rect();
     private Bitmap lineBitmap;
 
     private ValueAnimator valueAnimator;
@@ -56,10 +57,10 @@ public class ScanView extends View{
 
     public void setBorder(int[] border){
         borderRect.set(border[0],border[1],border[2],border[3]);
+        scanLineRect.set(borderRect.left,borderRect.top+scanLineOffsetY,borderRect.right,borderRect.top+5+scanLineOffsetY);
         setScanAnimation();
     }
 
-    @SuppressLint("DrawAllocation")
     @Override
     protected void onDraw(Canvas canvas) {
 
@@ -69,12 +70,10 @@ public class ScanView extends View{
     }
 
     private void drawScanLine(Canvas canvas) {
+
         //画扫描线
         mPaint.setColor(Color.GREEN);
-        canvas.drawBitmap(lineBitmap,
-                new Rect(0,0,lineBitmap.getWidth(),lineBitmap.getHeight()),
-                new Rect(borderRect.left,borderRect.top+scanLineOffsetY,borderRect.right, (int) (borderRect.top+5+scanLineOffsetY)),
-                null);
+        canvas.drawBitmap(lineBitmap,null,scanLineRect,null);
     }
 
     private void drawScanBorder(Canvas canvas) {
@@ -118,6 +117,7 @@ public class ScanView extends View{
             public void onAnimationUpdate(ValueAnimator animation) {
                 float value = (float) animation.getAnimatedValue();
                 scanLineOffsetY = (int) value;
+                scanLineRect.set(borderRect.left,borderRect.top+scanLineOffsetY,borderRect.right,borderRect.top+5+scanLineOffsetY);
                 //局部刷新
                 postInvalidate(borderRect.left,borderRect.top,borderRect.right,borderRect.bottom);
             }

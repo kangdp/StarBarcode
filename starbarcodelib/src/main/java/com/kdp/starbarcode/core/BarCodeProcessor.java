@@ -57,45 +57,54 @@ public class BarCodeProcessor {
         if (bfrm == null) {
             bfrm = new BarCodeReaderManager();
             BarCodeType barCodeType = barCodeScanConfig.getBarCodeType();
-            if (barCodeType == BarCodeType.ALL) {
-                bfrm.addAllBarCodeFormat();
-            } else if (barCodeType == BarCodeType.ONE_D_CODE) {
-                bfrm.addOneDBarCodeFormat();
-            } else if (barCodeType == BarCodeType.TWO_D_CODE) {
-                bfrm.addTwoDBarCodeForamt();
-            } else if (barCodeType == BarCodeType.QR_CODE) {
-                bfrm.addQRBarCode();
-            } else if (barCodeType == BarCodeType.CODE_128) {
-                bfrm.addCode128BarCode();
-            } else if (barCodeType == BarCodeType.CUSTOME) {
-                Collection<BarcodeFormat> barcodeFormats = barCodeScanConfig.getBarcodeFormats();
-                if (barcodeFormats == null || barcodeFormats.size() == 0)
-                    throw new IllegalArgumentException("The custom BarcodeFormats cannot be null,need at least one barcode format");
-                bfrm.addBarCodeFormat(barCodeScanConfig.getBarcodeFormats());
-            } else {
-                bfrm.addAllBarCodeFormat();
+            switch (barCodeType){
+                case ALL:
+                    bfrm.addAllBarCodeFormat();
+                    break;
+                case ONE_D_CODE:
+                    bfrm.addOneDBarCodeFormat();
+                    break;
+                case TWO_D_CODE:
+                    bfrm.addTwoDBarCodeForamt();
+                    break;
+                case QR_CODE:
+                    bfrm.addQRBarCode();
+                    break;
+                case CODE_128:
+                    bfrm.addCode128BarCode();
+                    break;
+                case CUSTOME:
+                    Collection<BarcodeFormat> barcodeFormats = barCodeScanConfig.getBarcodeFormats();
+                    if (barcodeFormats == null || barcodeFormats.size() == 0)
+                        throw new IllegalArgumentException("The custom BarcodeFormats cannot be null,need at least one barcode format");
+                    bfrm.addBarCodeFormat(barCodeScanConfig.getBarcodeFormats());
+                    break;
+                default:
+                    bfrm.addAllBarCodeFormat();
+                    break;
             }
+
         }
     }
 
     public void stopDecode() {
         if (decodeHandler == null) return;
-        Message quit = Message.obtain(decodeHandler, State.QUIT);
+        Message quit = Message.obtain(decodeHandler, State.QUIT.ordinal());
         quit.sendToTarget();
         try {
             decodeThread.join(500L);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        decodeHandler.removeMessages(State.SUCCESS);
-        decodeHandler.removeMessages(State.FAILED);
+        decodeHandler.removeMessages(State.SUCCESS.ordinal());
+        decodeHandler.removeMessages(State.FAILED.ordinal());
         decodeThread = null;
         decodeHandler = null;
     }
 
     public void pushFrame(byte[] data, int width, int height) {
         if (decodeHandler != null)
-            decodeHandler.obtainMessage(State.DECODE, width, height, data).sendToTarget();
+            decodeHandler.obtainMessage(State.DECODE.ordinal(), width, height, data).sendToTarget();
     }
 
 
@@ -113,14 +122,18 @@ public class BarCodeProcessor {
             BarCodeProcessor barCodeProcessor = weakReference.get();
             if (barCodeProcessor == null) return true;
             if (msg == null || !barCodeProcessor.running) return true;
-            if (msg.what == State.DECODE) {
-                barCodeProcessor.decodeFrame((byte[]) msg.obj, msg.arg1, msg.arg2);
-            } else if (msg.what == State.QUIT) {
-                barCodeProcessor.running = false;
-                Looper looper = Looper.myLooper();
-                if (looper != null) {
-                    looper.quit();
-                }
+
+            switch (State.values()[msg.what]){
+                case DECODE:
+                    barCodeProcessor.decodeFrame((byte[]) msg.obj, msg.arg1, msg.arg2);
+                    break;
+                case QUIT:
+                    barCodeProcessor.running = false;
+                    Looper looper = Looper.myLooper();
+                    if (looper != null) {
+                        looper.quit();
+                    }
+                    break;
             }
             return true;
         }
@@ -144,7 +157,7 @@ public class BarCodeProcessor {
         }
         PlanarYUVLuminanceSource source = buildLuminanceSource(data, width, height);
         Result result = null;
-        int state = State.FAILED;
+        State state = State.FAILED;
         if (source != null) {
             BinaryBitmap bitmap = new BinaryBitmap(new HybridBinarizer(source));
             result = bfrm.decodeWithState(bitmap);
@@ -185,12 +198,12 @@ public class BarCodeProcessor {
         return (int) Math.sqrt(Math.pow(point1X - point2X, 2) + Math.pow(point1Y - point2Y, 2));
     }
 
-    private void dispatchResult(Result result,int state) {
+    private void dispatchResult(Result result,State state) {
         if (result != null) {
-            Message message = Message.obtain(barCodeSRH, state, result);
+            Message message = Message.obtain(barCodeSRH, state.ordinal(), result);
             message.sendToTarget();
         } else {
-            Message message = Message.obtain(barCodeSRH, state);
+            Message message = Message.obtain(barCodeSRH, state.ordinal());
             message.sendToTarget();
         }
     }

@@ -1,13 +1,8 @@
 package com.kdp.starbarcode.view;
-
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
@@ -74,12 +69,12 @@ public abstract class AbBarCodeSurfaceView extends SurfaceView implements Surfac
         public boolean handleMessage(Message msg) {
             final AbBarCodeSurfaceView barCodeSFV = weakReference.get();
             if (barCodeSFV == null) return true;
-            switch (msg.what){
-                case State.SUCCESS:
+            switch (State.values()[msg.what]){
+                case SUCCESS:
                     if (barCodeSFV.listener != null)
                         barCodeSFV.listener.onSuccess(((Result) msg.obj).getText());
                     break;
-                case State.NONE:
+                case NONE:
                     barCodeSFV.cameraManager.adjustFocalDistance();
                     //延时0.5秒继续识别
                     barCodeSFV.postDelayed(new Runnable() {
@@ -89,7 +84,7 @@ public abstract class AbBarCodeSurfaceView extends SurfaceView implements Surfac
                         }
                     }, 500);
                     break;
-                case State.FAILED:
+                case FAILED:
                     if (barCodeSFV.listener != null)
                         barCodeSFV.listener.onFailure();
                     barCodeSFV.requestPreviewFrame();
