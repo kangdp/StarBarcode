@@ -113,7 +113,7 @@ public abstract class AbsCodec implements ICodec {
     }
 
     /**
-     * 使用YUV解析bitmap图片
+     * 使用YUV解析bitmap
      *
      * @param data
      * @param width
