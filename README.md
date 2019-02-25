@@ -109,7 +109,7 @@
               Bitmap bitmap = qrCodeCodec.encodeQRCode(String content,int pixelSize); //参数：要创建的二维码内容和尺寸
               //创建带logo的二维码图片,返回Bitmap
               Bitmap bitmap = qrCodeCodec.encodeQRCode(String content,int pixelSize,Bitmap logo); //参数：要创建的二维码的内容、尺寸和logo
-- 自定义条形码编解码器，定制自己的条形码(可参考库中已实现的[QRCodeCodec](https://github.com/kangdongpu/StarBarcode-master/blob/master/starbarcodelib/src/main/java/com/kdp/starbarcode/codec/QRCodeCodec.java)类)
+- 自定义条形码编解码器，定制自己的条形码(可参考库中已实现的[QRCodeCodec](https://github.com/kangdongpu/StarBarcode/blob/master/starbarcodelib/src/main/java/com/kdp/starbarcode/codec/QRCodeCodec.java)类)
 
 ## 感谢
 - [Zxing](https://github.com/zxing/zxing)
