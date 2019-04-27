@@ -1,16 +1,16 @@
 apply plugin: 'com.android.library'
-apply plugin: 'com.novoda.bintray-release'
-
-publish {
-    def bintrayPro = buildBintrayPro()
-    userOrg = bintrayPro['USER_ORG']
-    repoName = bintrayPro['REPO_NAME']
-    groupId = bintrayPro['GROUP_ID']
-    artifactId = bintrayPro['ARTIFACT_ID'] //项目名称
-    publishVersion = bintrayPro['PUBLISH_VERSION']//版本号
-    desc = bintrayPro['DESC']
-    website = bintrayPro['WEB_SITE']
-}
+//apply plugin: 'com.novoda.bintray-release'
+//
+//publish {
+//    def bintrayPro = buildBintrayPro()
+//    userOrg = bintrayPro['USER_ORG']
+//    repoName = bintrayPro['REPO_NAME']
+//    groupId = bintrayPro['GROUP_ID']
+//    artifactId = bintrayPro['ARTIFACT_ID'] //项目名称
+//    publishVersion = bintrayPro['PUBLISH_VERSION']//版本号
+//    desc = bintrayPro['DESC']
+//    website = bintrayPro['WEB_SITE']
+//}
 
 def buildBintrayPro() {
     def buildProperties = new Properties()

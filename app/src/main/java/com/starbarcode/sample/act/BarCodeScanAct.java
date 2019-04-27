@@ -12,6 +12,8 @@ import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
+
+import com.google.zxing.BarcodeFormat;
 import com.kdp.starbarcode.core.BarCodeType;
 import com.kdp.starbarcode.core.BarCodeScanConfig;
 import com.kdp.starbarcode.inter.OnBarCodeScanResultListener;
@@ -20,6 +22,8 @@ import com.kdp.starbarcode.view.BarCodePreview;
 import com.starbarcode.sample.Const;
 import com.starbarcode.sample.R;
 import com.starbarcode.sample.view.ScanView;
+
+import java.util.EnumSet;
 
 
 /***
@@ -107,13 +111,13 @@ public class BarCodeScanAct extends AppCompatActivity implements View.OnClickLis
                 .setROI(rect)//识别区域
                 .setAutofocus(autofocus)//自动对焦，默认为true
                 .setDisableContinuous(disableContinuous)//使用连续对焦，必须在Autofocus为true的前提下，该参数才有效;默认为true
-                .setBarCodeType(BarCodeType.values()[barcodeType])//识别所有的条形码
+//                .setBarCodeType(BarCodeType.values()[barcodeType])//识别所有的条形码
 //                .setBarCodeType(BarCodeType.ONE_D_CODE)//仅识别所有的一维条形码
 //                .setBarCodeType(BarCodeType.TWO_D_CODE)//仅识别所有的二维条形码
 //                .setBarCodeType(BarCodeType.QR_CODE)//仅识别二维码
 //                .setBarCodeType(BarCodeType.CODE_128)//仅识别CODE 128码
-//                .setBarCodeType(BarCodeType.CUSTOME)//自定义条码类型，必须指定自定义识别的条形码格式
-//                .setBarcodeFormats(EnumSet.of(BarcodeFormat.QR_CODE,BarcodeFormat.CODE_128))//定义识别的条形码格式
+                .setBarCodeType(BarCodeType.CUSTOME)//自定义条码类型，必须指定自定义识别的条形码格式
+                .setBarcodeFormats(EnumSet.of(BarcodeFormat.QR_CODE,BarcodeFormat.EAN_13))//定义识别的条形码格式
                 .setSupportAutoZoom(autoZoom)//当二维码图片较小时自动放大镜头(仅支持QR_CODE)
                 .build();
         barCodePreview.setBarCodeScanConfig(barCodeScanConfig);

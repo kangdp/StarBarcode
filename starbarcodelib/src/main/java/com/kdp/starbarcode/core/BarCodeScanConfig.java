@@ -50,7 +50,7 @@ public class BarCodeScanConfig {
 
 
     BarCodeType getBarCodeType() {
-        return barCodeType;
+        return barCodeType != null ? barCodeType : BarCodeType.ALL;
     }
 
     Collection<BarcodeFormat> getBarcodeFormats() {

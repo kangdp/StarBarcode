@@ -3,6 +3,7 @@ import android.content.Context;
 import android.os.Handler;
 import android.os.Message;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
@@ -71,8 +72,9 @@ public abstract class AbBarCodeSurfaceView extends SurfaceView implements Surfac
             if (barCodeSFV == null) return true;
             switch (State.values()[msg.what]){
                 case SUCCESS:
-                    if (barCodeSFV.listener != null)
+                    if (barCodeSFV.listener != null) {
                         barCodeSFV.listener.onSuccess(((Result) msg.obj).getText());
+                    }
                     break;
                 case NONE:
                     barCodeSFV.cameraManager.adjustFocalDistance();
