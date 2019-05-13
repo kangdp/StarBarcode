@@ -55,7 +55,7 @@ public abstract class AbBarCodeSurfaceView extends SurfaceView implements Surfac
     @Override
     public void surfaceDestroyed(SurfaceHolder holder) {
         isSurfaceCreate = false;
-        cameraManager.stopProview();
+        cameraManager.stopPreview();
     }
 
 
@@ -73,6 +73,7 @@ public abstract class AbBarCodeSurfaceView extends SurfaceView implements Surfac
             switch (State.values()[msg.what]){
                 case SUCCESS:
                     if (barCodeSFV.listener != null) {
+                        Log.e("11111", "handleMessage: type = " + ((Result) msg.obj).getBarcodeFormat() );
                         barCodeSFV.listener.onSuccess(((Result) msg.obj).getText());
                     }
                     break;
@@ -95,8 +96,8 @@ public abstract class AbBarCodeSurfaceView extends SurfaceView implements Surfac
             return true;
         }
     }
-    @Override
-    public void openCamera(SurfaceHolder holder) {
+
+     public void openCamera(SurfaceHolder holder) {
         cameraManager.openCamera(holder);
     }
 

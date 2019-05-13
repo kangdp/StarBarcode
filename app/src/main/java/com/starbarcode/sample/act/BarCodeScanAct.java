@@ -2,6 +2,7 @@ package com.starbarcode.sample.act;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.PixelFormat;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.os.Vibrator;
@@ -41,10 +42,6 @@ public class BarCodeScanAct extends AppCompatActivity implements View.OnClickLis
         setContentView(R.layout.act_qr);
         scanView = findViewById(R.id.scanview);
         barCodePreview = findViewById(R.id.barcodepreview);
-        Button btn_start_recognize = findViewById(R.id.btn_start_recognize);
-        Button btn_stop_recognize = findViewById(R.id.btn_stop_recognize);
-        Button btn_turn_on_flash = findViewById(R.id.btn_turn_on_flash);
-        Button btn_turn_off_flash = findViewById(R.id.btn_turn_off_flash);
         barCodePreview.setOnBarCodeScanResultListener(new OnBarCodeScanResultListener() {
 
             @Override
@@ -52,16 +49,18 @@ public class BarCodeScanAct extends AppCompatActivity implements View.OnClickLis
                 vibrate();
                 showSuccessDialog(result);
             }
-
             @Override
             public void onFailure() {
             }
         });
-        btn_start_recognize.setOnClickListener(this);
-        btn_stop_recognize.setOnClickListener(this);
-        btn_turn_on_flash.setOnClickListener(this);
-        btn_turn_off_flash.setOnClickListener(this);
-
+        findViewById(R.id.btn_start_recognize).setOnClickListener(this);
+        findViewById(R.id.btn_stop_recognize).setOnClickListener(this);
+        findViewById(R.id.btn_turn_on_flash).setOnClickListener(this);
+        findViewById(R.id.btn_turn_off_flash).setOnClickListener(this);
+        findViewById(R.id.btn_turn_on_camera).setOnClickListener(this);
+        findViewById(R.id.btn_turn_off_camera).setOnClickListener(this);
+        findViewById(R.id.btn_start_preview).setOnClickListener(this);
+        findViewById(R.id.btn_stop_preview).setOnClickListener(this);
         //扫描配置
         setScanConfig();
     }
@@ -111,13 +110,13 @@ public class BarCodeScanAct extends AppCompatActivity implements View.OnClickLis
                 .setROI(rect)//识别区域
                 .setAutofocus(autofocus)//自动对焦，默认为true
                 .setDisableContinuous(disableContinuous)//使用连续对焦，必须在Autofocus为true的前提下，该参数才有效;默认为true
-//                .setBarCodeType(BarCodeType.values()[barcodeType])//识别所有的条形码
+                .setBarCodeType(BarCodeType.values()[barcodeType])//识别所有的条形码
 //                .setBarCodeType(BarCodeType.ONE_D_CODE)//仅识别所有的一维条形码
 //                .setBarCodeType(BarCodeType.TWO_D_CODE)//仅识别所有的二维条形码
 //                .setBarCodeType(BarCodeType.QR_CODE)//仅识别二维码
 //                .setBarCodeType(BarCodeType.CODE_128)//仅识别CODE 128码
-                .setBarCodeType(BarCodeType.CUSTOME)//自定义条码类型，必须指定自定义识别的条形码格式
-                .setBarcodeFormats(EnumSet.of(BarcodeFormat.QR_CODE,BarcodeFormat.EAN_13))//定义识别的条形码格式
+//                .setBarCodeType(BarCodeType.CUSTOME)//自定义条码类型，必须指定自定义识别的条形码格式
+//                .setBarcodeFormats(EnumSet.of(BarcodeFormat.QR_CODE,BarcodeFormat.EAN_13))//定义识别的条形码格式
                 .setSupportAutoZoom(autoZoom)//当二维码图片较小时自动放大镜头(仅支持QR_CODE)
                 .build();
         barCodePreview.setBarCodeScanConfig(barCodeScanConfig);
@@ -156,9 +155,34 @@ public class BarCodeScanAct extends AppCompatActivity implements View.OnClickLis
                 break;
             case R.id.btn_turn_on_flash://打开闪光灯
                 barCodePreview.turnOnFlashLight();
-            break;
+                break;
             case R.id.btn_turn_off_flash://关闭闪光灯
                 barCodePreview.turnOffFlashLight();
+                break;
+            case R.id.btn_turn_on_camera://打开摄像头
+                barCodePreview.openCamera();
+                barCodePreview.setVisibility(View.VISIBLE);
+                scanView.setVisibility(View.VISIBLE);
+                scanView.startScan();
+                break;
+            case R.id.btn_turn_off_camera://关闭摄像头
+                barCodePreview.closeCamera();
+                barCodePreview.setVisibility(View.GONE);
+                scanView.setVisibility(View.GONE);
+                scanView.stopScan();
+                break;
+            case R.id.btn_start_preview://开始预览
+                scanView.setVisibility(View.VISIBLE);
+                scanView.startScan();
+                barCodePreview.startPreview();
+                barCodePreview.setVisibility(View.VISIBLE);
+                break;
+            case R.id.btn_stop_preview://停止预览
+                barCodePreview.stopRecognize();
+                barCodePreview.stopPreview();
+                barCodePreview.setVisibility(View.GONE);
+                scanView.setVisibility(View.GONE);
+                scanView.stopScan();
                 break;
         }
     }

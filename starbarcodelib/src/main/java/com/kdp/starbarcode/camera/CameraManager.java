@@ -125,7 +125,7 @@ public class CameraManager implements ICamera {
 
     @Override
     public void closeCamera() {
-        stopProview();
+        stopPreview();
         try {
             if (isOpenCamera()) {
                 Camera theCamera = mCamera.getCamera();
@@ -147,6 +147,7 @@ public class CameraManager implements ICamera {
     private void setCameraParametersAndROI(OpenCamera openCamera) {
 
         if (!mInitialized) {
+            mInitialized = true;
             cm.initCameraParameters(openCamera);
             setRealROI();
         }
@@ -160,7 +161,8 @@ public class CameraManager implements ICamera {
     /**
      * 停止预览
      */
-    public void stopProview() {
+    @Override
+    public void stopPreview() {
         if (isOpenCamera() && previewing) {
             try {
                 Camera theCamera = mCamera.getCamera();
@@ -180,7 +182,9 @@ public class CameraManager implements ICamera {
     /**
      * 开始预览
      */
-    private void startPreview() {
+
+    @Override
+    public void startPreview() {
         if (isOpenCamera() && !previewing) {
             try {
                 Camera theCamera = mCamera.getCamera();
@@ -195,6 +199,7 @@ public class CameraManager implements ICamera {
             }
         }
     }
+
 
     public void requestPreviewFrame() {
         if (isOpenCamera() && previewing) {

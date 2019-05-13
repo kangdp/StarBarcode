@@ -17,7 +17,7 @@
 - 支持扫描UI自定义
 
 ## 添加依赖
-     implementation 'com.kdp:starbarcode:1.0.3'
+     implementation 'com.kdp:starbarcode:1.0.4'
 ## 简单使用
 
 - 在布局xml中加入`BarCodePreview`
@@ -98,6 +98,10 @@
                ...      stopRecognize() //停止识别
                ...      turnOnFlashLight() //打开闪光灯,注意：在此之前必须先打开摄像头
                ...      turnOffFlashLight() //关闭闪光灯
+               ...      openCamera() //打开摄像头
+               ...      closeCamera() //关闭摄像头
+               ...      startPreview() //开始预览
+               ...      stopPreview() //停止预览
          
 - 创建/解析 二维码图片
 

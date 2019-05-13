@@ -56,6 +56,22 @@ public class BarCodePreview extends AbBarCodeSurfaceView {
             getHolder().removeCallback(this);
     }
 
+    /**
+     * 开始预览
+     */
+    @Override
+    public void startPreview() {
+        cameraManager.startPreview();
+    }
+
+    /**
+     * 停止预览
+     */
+    @Override
+    public void stopPreview() {
+        cameraManager.stopPreview();
+    }
+
 
     /**
      * 开始识别

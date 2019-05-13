@@ -10,6 +10,8 @@ import android.view.SurfaceHolder;
 public interface ICamera {
     void openCamera(SurfaceHolder holder);
     void closeCamera();
+    void startPreview();
+    void stopPreview();
     void turnOnFlashLight();
     void turnOffFlashLight();
 }
