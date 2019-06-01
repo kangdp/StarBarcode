@@ -3,7 +3,7 @@
     <string name="start_spot">开始识别</string>
     <string name="stop_spot">停止识别</string>
     <string name="turn_on_flashlight">打开闪光灯</string>
-    <string name="turn_off_flashlight">打开闪光灯</string>
+    <string name="turn_off_flashlight">关闭闪光灯</string>
     <string name="turn_on_camera">打开摄像头</string>
     <string name="turn_off_camera">关闭摄像头</string>
     <string name="start_preview">开始预览</string>
