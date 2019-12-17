@@ -63,6 +63,7 @@ class BarCodeReaderManager {
     void addOneDBarCodeFormat() {
         decodeFormats.addAll(BarCodeFormatManager.ONE_D_FORMATS);
         hintTypeMap.put(DecodeHintType.POSSIBLE_FORMATS, decodeFormats);
+        hintTypeMap.put(DecodeHintType.TRY_HARDER, Boolean.TRUE);
         hintTypeMap.put(DecodeHintType.CHARACTER_SET, "utf-8");
         multiFormatReader.setHints(hintTypeMap);
     }
@@ -95,6 +96,7 @@ class BarCodeReaderManager {
     void addCode128BarCode() {
         decodeFormats.addAll(BarCodeFormatManager.CODE_128_FORMATS);
         hintTypeMap.put(DecodeHintType.POSSIBLE_FORMATS, decodeFormats);
+        hintTypeMap.put(DecodeHintType.TRY_HARDER, Boolean.TRUE);
         hintTypeMap.put(DecodeHintType.CHARACTER_SET, "utf-8");
         multiFormatReader.setHints(hintTypeMap);
     }
