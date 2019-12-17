@@ -2,7 +2,7 @@
 一个基于Zxing封装的条形码扫描库。支持多种条形码，可生成、解析带logo的二维码，自动放大镜头，设备移动时自动对焦、连续对焦，扫描UI自定义。
 
 ## Demo下载
-[app-release.apk](https://github.com/kangdongpu/StarBarcode/raw/master/app-release.apk)
+[app-release.apk](https://github.com/kangdp/StarBarcode/raw/master/app-release.apk)
 ## 截图
 <img src="https://github.com/kangdongpu/StarBarcode/blob/master/screenshot/MainAct.png" width="300"/>   <img src="https://github.com/kangdongpu/StarBarcode/blob/master/screenshot/QRCodeCodecAct.png" width="300"/>
 <img src="https://github.com/kangdongpu/StarBarcode/blob/master/screenshot/BarcodeScanAct.png" width="300"/>   <img src="https://github.com/kangdongpu/StarBarcode/blob/master/screenshot/ScanResult.png" width="300"/>
