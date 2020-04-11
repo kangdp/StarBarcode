@@ -77,4 +77,5 @@
         android:text="@string/stop_preview"
         />
 
+
 </android.support.constraint.ConstraintLayout>

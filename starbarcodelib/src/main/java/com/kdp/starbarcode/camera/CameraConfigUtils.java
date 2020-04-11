@@ -47,6 +47,7 @@ public final class CameraConfigUtils {
         int maxResolution = 0;
         Camera.Size maxResPreviewSize = null;
         for (Camera.Size size : rawSupportedSizes) {
+            Log.d(TAG, "findBestPreviewSizeValue: realWidth = " + size.width + " realHeight = "+ size.height);
             int realWidth = size.width;
             int realHeight = size.height;
             int resolution = realWidth * realHeight;
@@ -121,6 +122,11 @@ public final class CameraConfigUtils {
         }
     }
 
+    /**
+     * 设置闪光灯
+     * @param camera
+     * @param on
+     */
     static void setTorch(Camera camera, boolean on) {
         Camera.Parameters parameters = camera.getParameters();
         List<String> supportedFlashModes = parameters.getSupportedFlashModes();
@@ -150,6 +156,10 @@ public final class CameraConfigUtils {
         return null;
     }
 
+    /**
+     * 调节焦距
+     * @param camera
+     */
     static void adjustFocalDistance(Camera camera) {
         Camera.Parameters parameters = camera.getParameters();
         if (parameters.isZoomSupported()) {
@@ -165,13 +175,20 @@ public final class CameraConfigUtils {
         }
     }
 
-    static void resetFocalDistance(Camera camera) {
+    /**
+     * 设置焦距
+     */
+    static void setZoom(int zoomValue,Camera camera){
         Camera.Parameters parameters = camera.getParameters();
-        if (parameters.isZoomSupported() && parameters.getZoom() > 0) {
-            parameters.setZoom(0);
+        if (parameters.isZoomSupported() && zoomValue > 0) {
+            int maxZoom = parameters.getMaxZoom();
+            if (zoomValue > maxZoom){
+                parameters.setZoom(maxZoom);
+            }else {
+                parameters.setZoom(zoomValue);
+            }
             camera.setParameters(parameters);
         }
     }
-
 
 }

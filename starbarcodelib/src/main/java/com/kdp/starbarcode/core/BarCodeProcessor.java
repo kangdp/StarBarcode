@@ -79,9 +79,6 @@ public class BarCodeProcessor {
                         throw new IllegalArgumentException("The custom BarcodeFormats cannot be null,need at least one barcode format");
                     bfrm.addBarCodeFormat(barCodeScanConfig.getBarcodeFormats());
                     break;
-                default:
-                    bfrm.addAllBarCodeFormat();
-                    break;
             }
 
         }

@@ -1,17 +1,19 @@
 apply plugin: 'com.android.library'
-//apply plugin: 'com.novoda.bintray-release'
-//
+//apply plugin: "guru.stefma.bintrayrelease"
+
+//def bintrayPro = buildBintrayPro()
+//version = bintrayPro['PUBLISH_VERSION']
+//group = bintrayPro['GROUP_ID']
+//androidArtifact {
+//    artifactId = bintrayPro['ARTIFACT_ID']
+//}
 //publish {
-//    def bintrayPro = buildBintrayPro()
 //    userOrg = bintrayPro['USER_ORG']
 //    repoName = bintrayPro['REPO_NAME']
-//    groupId = bintrayPro['GROUP_ID']
-//    artifactId = bintrayPro['ARTIFACT_ID']
-//    publishVersion = bintrayPro['PUBLISH_VERSION']
 //    desc = bintrayPro['DESC']
 //    website = bintrayPro['WEB_SITE']
 //}
-
+//
 //def buildBintrayPro() {
 //    def buildProperties = new Properties()
 //    buildProperties.load(new FileInputStream(file("../local.properties")))

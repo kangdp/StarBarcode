@@ -10,6 +10,7 @@
 ## 功能
 - 支持多种条形码格式
 - 支持移动对焦、连续对焦
+- 支持调节焦距
 - 支持当二维码较小时自动放大镜头(仅限二维码)
 - 支持闪光灯
 - 支持创建二维码，识别Bitmap二维码图片
@@ -76,6 +77,7 @@
          BarCodeScanConfig barCodeScanConfig = new BarCodeScanConfig.Builder()
                 .setROI(rect) //识别区域
                 .setAutofocus(true) //自动对焦，默认为true
+                .setZoom(30)//焦距
                 .setDisableContinuous(false) //是否禁用连续对焦，必须在Autofocus为true的前提下，该参数才有效;默认为true
                 .setBarCodeType(BarCodeType.ALL) //识别所有的条形码
                 .setBarCodeType(BarCodeType.ONE_D_CODE) //仅识别所有的一维条形码
@@ -102,6 +104,7 @@
                ...      closeCamera() //关闭摄像头
                ...      startPreview() //开始预览
                ...      stopPreview() //停止预览
+               ...      setZoom(...) //设置焦距
          
 - 创建/解析 二维码图片
 

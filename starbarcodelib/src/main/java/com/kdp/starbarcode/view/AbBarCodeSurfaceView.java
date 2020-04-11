@@ -3,7 +3,6 @@ import android.content.Context;
 import android.os.Handler;
 import android.os.Message;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
@@ -73,7 +72,6 @@ public abstract class AbBarCodeSurfaceView extends SurfaceView implements Surfac
             switch (State.values()[msg.what]){
                 case SUCCESS:
                     if (barCodeSFV.listener != null) {
-                        Log.e("11111", "handleMessage: type = " + ((Result) msg.obj).getBarcodeFormat() );
                         barCodeSFV.listener.onSuccess(((Result) msg.obj).getText());
                     }
                     break;

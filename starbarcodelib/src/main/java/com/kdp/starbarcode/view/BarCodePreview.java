@@ -1,8 +1,6 @@
 package com.kdp.starbarcode.view;
-
 import android.content.Context;
 import android.util.AttributeSet;
-
 import com.kdp.starbarcode.core.BarCodeScanConfig;
 import com.kdp.starbarcode.inter.OnBarCodeScanResultListener;
 
@@ -91,14 +89,29 @@ public class BarCodePreview extends AbBarCodeSurfaceView {
         barCodeProcessor.stopDecode();
     }
 
+    /**
+     * 打开闪光灯
+     */
     @Override
     public void turnOnFlashLight() {
         cameraManager.turnOnFlashLight();
     }
 
+    /**
+     * 关闭闪光灯
+     */
     @Override
     public void turnOffFlashLight() {
         cameraManager.turnOffFlashLight();
+    }
+
+    /**
+     * 设置焦距
+     * @param zoom
+     */
+    @Override
+    public void setZoom(int zoom) {
+        cameraManager.setZoom(zoom);
     }
 
 }

@@ -14,4 +14,5 @@ public interface ICamera {
     void stopPreview();
     void turnOnFlashLight();
     void turnOffFlashLight();
+    void setZoom(int zoom);
 }

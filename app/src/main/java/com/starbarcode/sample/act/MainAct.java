@@ -8,14 +8,10 @@ import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.RadioButton;
 import android.widget.RadioGroup;
-
-import com.kdp.starbarcode.core.BarCodeType;
 import com.starbarcode.sample.Const;
 import com.starbarcode.sample.R;
 

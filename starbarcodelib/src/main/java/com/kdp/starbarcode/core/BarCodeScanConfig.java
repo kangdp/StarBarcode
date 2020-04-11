@@ -17,6 +17,8 @@ public class BarCodeScanConfig {
     private boolean autofocus;
     //是否禁止连续对焦.默认禁止
     private boolean disableContinuous;
+    //摄像头焦距
+    private int zoom;
     //自动调节焦距(仅支持QR_CODE)
     private boolean isSupportAutoZoom;
     //识别的条码类型
@@ -28,6 +30,7 @@ public class BarCodeScanConfig {
         this.autofocus = builder.autofocus;
         this.disableContinuous = builder.disableContinuous;
         this.isSupportAutoZoom = builder.isSupportAutoZoom;
+        this.zoom = builder.zoom;
         this.barCodeType = builder.barCodeType;
         this.barcodeFormats = builder.barcodeFormats;
     }
@@ -48,6 +51,9 @@ public class BarCodeScanConfig {
         return isSupportAutoZoom;
     }
 
+    public int getZoom() {
+        return zoom;
+    }
 
     BarCodeType getBarCodeType() {
         return barCodeType != null ? barCodeType : BarCodeType.ALL;
@@ -63,6 +69,7 @@ public class BarCodeScanConfig {
         private boolean autofocus = true;
         private boolean disableContinuous = true;
         private boolean isSupportAutoZoom;
+        private int zoom;
 
         private BarCodeType barCodeType;
 
@@ -80,6 +87,11 @@ public class BarCodeScanConfig {
 
         public Builder setSupportAutoZoom(boolean supportAutoZoom) {
             isSupportAutoZoom = supportAutoZoom;
+            return this;
+        }
+
+        public Builder setZoom(int zoom){
+            this.zoom = zoom;
             return this;
         }
 

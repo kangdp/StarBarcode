@@ -2,7 +2,6 @@ package com.starbarcode.sample.act;
 
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.PixelFormat;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.os.Vibrator;
@@ -12,19 +11,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.Button;
-
-import com.google.zxing.BarcodeFormat;
+import android.widget.SeekBar;
 import com.kdp.starbarcode.core.BarCodeType;
 import com.kdp.starbarcode.core.BarCodeScanConfig;
 import com.kdp.starbarcode.inter.OnBarCodeScanResultListener;
 import com.kdp.starbarcode.view.BarCodePreview;
-
 import com.starbarcode.sample.Const;
 import com.starbarcode.sample.R;
 import com.starbarcode.sample.view.ScanView;
-
-import java.util.EnumSet;
 
 
 /***
@@ -108,6 +102,7 @@ public class BarCodeScanAct extends AppCompatActivity implements View.OnClickLis
         Rect rect = new Rect(left,top,right,bottom);
         BarCodeScanConfig barCodeScanConfig = new BarCodeScanConfig.Builder()
                 .setROI(rect)//识别区域
+                .setZoom(30)//焦距
                 .setAutofocus(autofocus)//自动对焦，默认为true
                 .setDisableContinuous(disableContinuous)//使用连续对焦，必须在Autofocus为true的前提下，该参数才有效;默认为true
                 .setBarCodeType(BarCodeType.values()[barcodeType])//识别所有的条形码

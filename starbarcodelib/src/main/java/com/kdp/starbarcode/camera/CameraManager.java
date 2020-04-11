@@ -149,6 +149,7 @@ public class CameraManager implements ICamera {
         if (!mInitialized) {
             mInitialized = true;
             cm.initCameraParameters(openCamera);
+            setZoom(barCodePreview.getBarCodeScanConfig().getZoom());
             setRealROI();
         }
         cm.setDesiredCameraParameters(openCamera);
@@ -249,12 +250,11 @@ public class CameraManager implements ICamera {
     }
 
     /**
-     * 重置焦距
+     * 设置焦距
+     * @param zoomValue
      */
-//    public void resetFocalDistance() {
-//        if (isOpenCamera() && previewing) {
-//            Camera theCamera = mCamera.getCamera();
-//            CameraConfigUtils.resetFocalDistance(theCamera);
-//        }
-//    }
+    public void setZoom(int zoomValue){
+        CameraConfigUtils.setZoom(zoomValue,mCamera.getCamera());
+    }
+
 }
