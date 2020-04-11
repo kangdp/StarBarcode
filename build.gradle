@@ -34,6 +34,9 @@ allprojects {
     repositories {
         google()
         jcenter()
+        maven {
+            url 'https://dl.bintray.com/kangdongpu/android'//发布到jcenter上就不需要了
+        }
     }
 }
 
