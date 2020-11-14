@@ -106,6 +106,15 @@ public class BarCodePreview extends AbBarCodeSurfaceView {
     }
 
     /**
+     * 是否开启闪光灯
+     * @return
+     */
+    @Override
+    public boolean isTurnOnFlashLight() {
+        return cameraManager.isTurnOnFlashLight();
+    }
+
+    /**
      * 设置焦距
      * @param zoom
      */

@@ -236,6 +236,15 @@ public class CameraManager implements ICamera {
         }
     }
 
+    /**
+     * 是否已开启闪光灯
+     * @return
+     */
+    @Override
+    public boolean isTurnOnFlashLight() {
+        return CameraConfigUtils.isTurnOnFlashLight(mCamera.getCamera());
+    }
+
     private boolean isSupportFlight() {
         return mContext.getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA_FLASH);
     }

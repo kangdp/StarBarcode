@@ -3,6 +3,7 @@ package com.kdp.starbarcode.camera;
 
 import android.graphics.Point;
 import android.hardware.Camera;
+import android.os.Build;
 import android.util.Log;
 
 import com.kdp.starbarcode.core.BarCodeScanConfig;
@@ -154,6 +155,17 @@ public final class CameraConfigUtils {
             }
         }
         return null;
+    }
+
+    /**
+     * 判断是否已开启闪光灯
+     * @param camera
+     * @return
+     */
+    static boolean isTurnOnFlashLight(Camera camera){
+        Camera.Parameters parameters = camera.getParameters();
+        String flashMode = parameters.getFlashMode();
+        return (Camera.Parameters.FLASH_MODE_TORCH.equals(flashMode) || Camera.Parameters.FLASH_MODE_ON.equals(flashMode));
     }
 
     /**
