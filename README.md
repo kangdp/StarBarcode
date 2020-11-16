@@ -18,7 +18,7 @@
 - 支持扫描UI自定义
 
 ## 添加依赖
-     implementation 'com.kdp:starbarcode:1.0.5'
+     implementation 'com.kdp:starbarcode:1.0.6'
 ## 简单使用
 
 - 在布局xml中加入`BarCodePreview`

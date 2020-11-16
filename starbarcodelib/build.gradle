@@ -1,6 +1,6 @@
 apply plugin: 'com.android.library'
 //apply plugin: "guru.stefma.bintrayrelease"
-
+//
 //def bintrayPro = buildBintrayPro()
 //version = bintrayPro['PUBLISH_VERSION']
 //group = bintrayPro['GROUP_ID']
