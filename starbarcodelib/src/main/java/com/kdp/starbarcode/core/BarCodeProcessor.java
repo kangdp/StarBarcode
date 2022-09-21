@@ -5,6 +5,7 @@ import android.os.HandlerThread;
 import android.os.Looper;
 import android.os.Message;
 import com.google.zxing.BarcodeFormat;
+import com.google.zxing.common.GlobalHistogramBinarizer;
 import com.kdp.starbarcode.State;
 import com.kdp.starbarcode.view.BarCodePreview;
 import com.google.zxing.BinaryBitmap;
@@ -156,11 +157,16 @@ public class BarCodeProcessor {
         Result result = null;
         State state = State.FAILED;
         if (source != null) {
-            BinaryBitmap bitmap = new BinaryBitmap(new HybridBinarizer(source));
+            BinaryBitmap bitmap = new BinaryBitmap(new GlobalHistogramBinarizer(source));
             result = bfrm.decodeWithState(bitmap);
+            if (result == null){
+                bitmap = new BinaryBitmap(new HybridBinarizer(source));
+                result = bfrm.decodeWithState(bitmap);
+            }
             if (result != null) {
                 state = State.SUCCESS;
             } else {
+
                 if (barCodeScanConfig.getBarCodeType() == BarCodeType.QR_CODE && barCodeScanConfig.isSupportAutoZoom()) {
                     DetectorResult detectorResult;
                     try {
@@ -179,6 +185,7 @@ public class BarCodeProcessor {
                 }
             }
         }
+
         dispatchResult(result, state);
     }
 
