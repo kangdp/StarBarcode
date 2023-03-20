@@ -3,6 +3,7 @@ package com.kdp.starbarcode.camera;
 import android.content.Context;
 import android.graphics.Point;
 import android.hardware.Camera;
+import android.util.Log;
 import android.view.Display;
 import android.view.Surface;
 import android.view.WindowManager;
@@ -30,7 +31,7 @@ class CameraConfigManager {
         Display display = manager.getDefaultDisplay();
         int displayRotation = display.getRotation();
         int cwRotationFromNaturalToDisplay;
-
+        // 0表示是竖屏; 90表示是左横屏; 180表示是反向竖屏; 270表示是右横屏
         switch (displayRotation) {
             case Surface.ROTATION_0:
                 cwRotationFromNaturalToDisplay = 0;
@@ -52,6 +53,7 @@ class CameraConfigManager {
                 }
         }
         int cwRotationFromNaturalToCamera = camera.getOrientation();
+        Log.i(CameraConfigManager.class.getSimpleName(), "initCameraParameters: cwRotationFromNaturalToCamera: " + cwRotationFromNaturalToCamera);
         if (camera.getFacing() == CameraFacing.FRONT) {
             cwRotationFromNaturalToCamera = (360 - cwRotationFromNaturalToCamera) % 360;
         }

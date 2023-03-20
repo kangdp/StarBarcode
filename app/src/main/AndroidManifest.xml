@@ -21,7 +21,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="com.starbarcode.sample.act.BarCodeScanAct"
+        <activity android:name="com.starbarcode.sample.acrCodeScanAct"
             android:theme="@style/AppTheme.Scan"
             android:screenOrientation="portrait"
             android:configChanges="orientation|screenSize|keyboardHidden"/>

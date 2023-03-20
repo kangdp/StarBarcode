@@ -25,8 +25,10 @@ public final class CameraConfigUtils {
      * @return
      */
     static Point findBestPreviewSizeValue(Camera.Parameters parameters, Point screenResolution) {
-
         List<Camera.Size> rawSupportedSizes = parameters.getSupportedPreviewSizes();
+        Log.i(TAG, "findBestPreviewSizeValue: screenWidth: " + screenResolution.x + " screenHeight: " + screenResolution.y);
+//        Log.i(TAG, "findBestPreviewSizeValue: defaultWidth: " + parameters.getPreviewSize().width);
+//        Log.i(TAG, "findBestPreviewSizeValue: defaultHeight: " + parameters.getPreviewSize().height);
         if (rawSupportedSizes == null) {
             Camera.Size defaultSize = parameters.getPreviewSize();
             if (defaultSize == null) {
@@ -35,37 +37,32 @@ public final class CameraConfigUtils {
             return new Point(defaultSize.width, defaultSize.height);
         }
 
-        if (Log.isLoggable(TAG, Log.INFO)) {
-            StringBuilder previewSizesString = new StringBuilder();
-            for (Camera.Size size : rawSupportedSizes) {
-                previewSizesString.append(size.width).append('x').append(size.height).append(' ');
-            }
-        }
-
         double screenAspectRatio = screenResolution.x / (double) screenResolution.y;
+        if (screenResolution.x > screenResolution.y){
+            screenAspectRatio = screenResolution.y / (double)screenResolution.x;
+        }
 
         // 找到一个合适的尺寸
         int maxResolution = 0;
         Camera.Size maxResPreviewSize = null;
         for (Camera.Size size : rawSupportedSizes) {
-            Log.d(TAG, "findBestPreviewSizeValue: realWidth = " + size.width + " realHeight = "+ size.height);
+            Log.i(TAG, "findBestPreviewSizeValue: realWidth = " + size.width + " realHeight = "+ size.height);
             int realWidth = size.width;
             int realHeight = size.height;
             int resolution = realWidth * realHeight;
             if (resolution < MIN_PREVIEW_PIXELS) {
                 continue;
             }
-
-            boolean isCandidatePortrait = realWidth < realHeight;
-            int maybeFlippedWidth = isCandidatePortrait ? realHeight : realWidth;
-            int maybeFlippedHeight = isCandidatePortrait ? realWidth : realHeight;
-            double aspectRatio = maybeFlippedWidth / (double) maybeFlippedHeight;
+            double aspectRatio = realHeight / (double) realWidth;
+            if (aspectRatio > 1){
+                aspectRatio = realWidth / (double) realHeight;
+            }
             double distortion = Math.abs(aspectRatio - screenAspectRatio);
             if (distortion > MAX_ASPECT_DISTORTION) {
                 continue;
             }
 
-            if (maybeFlippedWidth == screenResolution.x && maybeFlippedHeight == screenResolution.y) {
+            if (Math.min(realWidth,realHeight) == Math.min(screenResolution.x,screenResolution.y) && Math.max(realWidth,realHeight) == Math.max(screenResolution.x,screenResolution.y) ) {
                 Point exactPoint = new Point(realWidth, realHeight);
                 return exactPoint;
             }

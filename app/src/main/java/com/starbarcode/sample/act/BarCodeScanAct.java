@@ -102,7 +102,7 @@ public class BarCodeScanAct extends AppCompatActivity implements View.OnClickLis
         Rect rect = new Rect(left,top,right,bottom);
         BarCodeScanConfig barCodeScanConfig = new BarCodeScanConfig.Builder()
                 .setROI(rect)//识别区域
-                .setZoom(30)//焦距
+//                .setZoom(0)//焦距
                 .setAutofocus(autofocus)//自动对焦，默认为true
                 .setDisableContinuous(disableContinuous)//使用连续对焦，必须在Autofocus为true的前提下，该参数才有效;默认为true
                 .setBarCodeType(BarCodeType.values()[barcodeType])//识别所有的条形码
