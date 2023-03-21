@@ -144,15 +144,6 @@ public class BarCodeProcessor {
      * @param height
      */
     private void decodeFrame(byte[] data, int width, int height) {
-        if (width < height) {
-            // portrait
-            byte[] rotatedData = new byte[data.length];
-            for (int x = 0; x < width; x++) {
-                for (int y = 0; y < height; y++)
-                    rotatedData[y * width + width - x - 1] = data[y + x * height];
-            }
-            data = rotatedData;
-        }
         PlanarYUVLuminanceSource source = buildLuminanceSource(data, width, height);
         Result result = null;
         State state = State.FAILED;
@@ -219,4 +210,5 @@ public class BarCodeProcessor {
         return new PlanarYUVLuminanceSource(data, width, height, borders.left, borders.top,
                 borders.width(), borders.height(), false);
     }
+
 }
